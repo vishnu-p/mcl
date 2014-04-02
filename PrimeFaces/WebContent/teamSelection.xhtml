@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/page-templates/pageTemplate.xhtml">
+
+	<!-- Populates head tag of the page template -->
+	<ui:define name="head-element">
+		<meta name="keywords" content="MCL, HCL League" />
+	</ui:define>
+
+	<!-- Page Header Contents -->
+	<ui:define name="page-header">
+		<ui:include src="/WEB-INF/page-fragments/header.xhtml" />
+	</ui:define>
+
+	<!-- Page Body Contents -->
+	<ui:define name="page-body">
+		<p:spacer height="0" />
+		<div class="team-selection-section">
+			
+		</div>
+	</ui:define>
+
+	<!-- Page Footer Contents -->
+	<ui:define name="page-footer">
+		<ui:include src="./WEB-INF/page-fragments/footer.xhtml" />
+	</ui:define>
+</ui:composition>

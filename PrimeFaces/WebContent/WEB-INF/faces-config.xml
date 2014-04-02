@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+    http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
+
+	<managed-bean>
+		<managed-bean-name>tableBean</managed-bean-name>
+		<managed-bean-class>com.mcl.domain.cricket.data.ListData</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>pickListBean</managed-bean-name>
+		<managed-bean-class>com.mcl.domain.PickListBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<converter>
+		<description>Converter for Player</description>
+		<converter-id>player</converter-id>
+		<converter-class>com.mcl.domain.PlayerConverter</converter-class>
+	</converter>
+
+
+	<!-- <application> <view-handler>com.sun.facelets.FaceletViewHandler</view-handler> 
+		</application> -->
+	<!-- <navigation-rule> <from-view-id>/editDataTable.xhtml</from-view-id> 
+		<navigation-case> <from-outcome>success</from-outcome> <to-view-id>/dtable.xhtml</to-view-id> 
+		</navigation-case> </navigation-rule> <navigation-rule> <from-view-id>/edit_manage_payee.xhtml</from-view-id> 
+		<navigation-case> <from-outcome>success</from-outcome> <to-view-id>/manage_payee.xhtml</to-view-id> 
+		</navigation-case> <navigation-case> <from-outcome>failure</from-outcome> 
+		<to-view-id>/manage_payee.xhtml?msg=error</to-view-id> </navigation-case> 
+		</navigation-rule> -->
+</faces-config>
