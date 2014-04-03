@@ -20,14 +20,56 @@
 	<ui:define name="page-body">
 		<p:spacer height="0" />
 		<div class="team-selection-section">
-			
-			
-			<h2>Added a new section</h2>
+			<h:form>
+
+				<p:growl id="msg" showDetail="true" escape="false" />			
+
+				<h3>Select the required Players</h3><br />
+				<p:pickList id="pojoPickList" value="#{team.players}"
+					var="player" effect="bounce" itemValue="#{player}"
+					itemLabel="#{player.name}" converter="player"
+					showSourceControls="false" showTargetControls="false"
+					showCheckbox="false" showSourceFilter="true" showTargetFilter="true"
+					filterMatchMode="contains">
+
+					<f:facet name="sourceCaption">Pool of Players</f:facet>
+					<f:facet name="targetCaption">Current Selection</f:facet>					
+					<p:ajax event="transfer" listener="#{team.onTransfer}" />
+
+					<p:column style="width:25%">
+					<!-- 	<p:graphicImage value="/images/barca/#{player.photo}" width="30"
+							height="40" /> --> Test
+					</p:column>
+
+					<p:column style="width:75%;">  
+			            #{player.name}  
+			        </p:column>
+
+				</p:pickList>
+
+				<p:commandButton id="pojoSubmit" value="Submit"
+					update="displayPlayers" oncomplete="PF('playerDialog').show()"
+					style="margin-top:5px" />
+
+				<p:dialog modal="true" showEffect="fade" hideEffect="fade"
+					widgetVar="playerDialog">
+					<h:panelGrid id="displayPlayers" columns="2">
+						<h:outputText value="Source: " style="font-weight:bold" />
+						<ui:repeat value="#{pickListBean.players.source}" var="player">
+							<h:outputText value="#{player.name}" style="margin-right:5px" />
+						</ui:repeat>
+
+						<h:outputText value="Target: " style="font-weight:bold" />
+						<ui:repeat value="#{pickListBean.players.target}" var="player">
+							<h:outputText value="#{player.name}" style="margin-right:5px" />
+						</ui:repeat>
+					</h:panelGrid>
+				</p:dialog>
+
+			</h:form>
 		</div>
 	</ui:define>
-
-	<!-- Page Footer Contents -->
 	<ui:define name="page-footer">
-		<ui:include src="./WEB-INF/page-fragments/footer.xhtml" />
+		<ui:include src="/WEB-INF/page-fragments/footer.xhtml" />
 	</ui:define>
 </ui:composition>
