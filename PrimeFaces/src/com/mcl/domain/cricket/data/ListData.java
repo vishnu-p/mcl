@@ -54,6 +54,8 @@ public class ListData {
         populateRandomPlayers(allPlayers, 9);  
     }  
     
+    
+    
     public static String[] getTeam() {
 		return team;
 	}
@@ -119,7 +121,7 @@ public class ListData {
     }  
     
     public void onTransfer(TransferEvent event) {  
-        StringBuilder builder = new StringBuilder();  
+       /* StringBuilder builder = new StringBuilder();  
         for(Object item : event.getItems()) {  
             builder.append(((Player)item).getPlayerName()).append("<br />");  
         }  
@@ -129,8 +131,8 @@ public class ListData {
         msg.setSummary("Items Transferred");  
         msg.setDetail(builder.toString());  
           
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-    }  
+        FacesContext.getCurrentInstance().addMessage(null, msg); */
+    } 
   
    
 }  
