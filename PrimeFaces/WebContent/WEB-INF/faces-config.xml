@@ -8,7 +8,7 @@
 	<managed-bean>
 		<managed-bean-name>team</managed-bean-name>
 		<managed-bean-class>com.mcl.domain.cricket.data.ListData</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>pickListBean</managed-bean-name>
@@ -16,19 +16,19 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
-	<converter>
+	<!-- <converter>
 		<description>Converter for Player</description>
+		<converter-id>player</converter-id>
+		<converter-class>com.mcl.domain.PlayerConverter</converter-class>
+	</converter> -->
+	
+	<converter>
+		<description>Player Converter</description>
 		<converter-id>player</converter-id>
 		<converter-class>com.mcl.domain.PlayerConverter</converter-class>
 	</converter>
 	
-	<converter>
-		<description>Converter for Player</description>
-		<converter-id>players</converter-id>
-		<converter-class>com.mcl.domain.PlayerConverter</converter-class>
-	</converter>
-
-
+	
 	<!-- <application> <view-handler>com.sun.facelets.FaceletViewHandler</view-handler> 
 		</application> -->
 	<!-- <navigation-rule> <from-view-id>/editDataTable.xhtml</from-view-id> 

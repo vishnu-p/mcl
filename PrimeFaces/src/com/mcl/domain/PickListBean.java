@@ -57,11 +57,11 @@ public class PickListBean {
     }  
       
     public void onTransfer(TransferEvent event) {  
-        StringBuilder builder = new StringBuilder();  
+    	/*  StringBuilder builder = new StringBuilder();  
         for(Object item : event.getItems()) {  
             builder.append(((Player) item).getName()).append("<br />");  
         }            
-       /* FacesMessage msg = new FacesMessage();  
+       FacesMessage msg = new FacesMessage();  
         msg.setSeverity(FacesMessage.SEVERITY_INFO);  
         msg.setSummary("Items Transferred");  
         msg.setDetail(builder.toString());  
