@@ -1,0 +1,61 @@
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+		<ul class="menu">
+			<c:choose>
+				<c:when test="#{flowScope.userAccountBean eq 'anonymousUser'}">
+					<li class="#{menuSelector == 'myHome'? 'active' : ''}"><h:commandLink
+							id="home" value="#{mcl['menu_home']}" action="defHome"
+							title="Home Page" immediate="true" /></li>
+					<li class="#{menuSelector == 'myRules'? 'active' : ''}"><h:commandLink
+							id="rules" value="#{mcl['menu_rules']}" action="defRules"
+							title="Rules &amp; Scoring" immediate="true" /></li>
+					<li class="#{menuSelector == 'myAbout'? 'active' : ''}"><h:commandLink
+							id="about" value="#{mcl['menu_about']}" action="about"
+							title="About the League" immediate="true" /></li>
+					<li class="#{menuSelector == 'myPrizes'? 'active' : ''}"><h:commandLink
+							id="prizes" value="#{mcl['menu_prizes']}" action="prizes"
+							title="Prizes &amp; Rewards" immediate="true" /></li>
+					<li class="#{menuSelector == 'myLogin'? 'active' : ''}">
+						<!-- <h:commandLink
+							id="login" value="#{mcl['menu_login']}" action="login"
+							title="Login" immediate="true" /> --> <p:commandLink
+							value="Login" onclick="confirmDialog.show()" immediate="false" />
+					</li>
+				</c:when>
+				<c:when
+					test="#{not empty flowScope.userAccountBean.role and flowScope.userAccountBean.role eq 'USER'}">
+					<li class="#{menuSelector == 'myDashboard'? 'active' : ''}"><h:commandLink
+							id="dashboard" value="#{mcl['menu_dashboard']}"
+							action="dashboard" title="Dashboard" immediate="true" /></li>
+					<li class="#{menuSelector == 'myRules'? 'active' : ''}"><h:commandLink
+							id="rules" value="#{mcl['menu_rules']}" action="rules"
+							title="Rules" immediate="true" /></li>
+					<li class="#{menuSelector == 'myPrizes'? 'active' : ''}"><h:commandLink
+							id="prizes" value="#{mcl['menu_prizes']}" action="prizes"
+							title="Prizes &amp; Rewards" immediate="true" /></li>
+					<li class="#{menuSelector == 'myLeaderboard'? 'active' : ''}">
+						<h:commandLink id="leaderboard" value="#{mcl['menu_leaderboard']}"
+							action="leaderboard" title="Leaderboard" immediate="true" />
+					</li>
+					<li><h:commandLink id="logout" value="Logout" action="logout"
+							title="Logout" immediate="true" /></li>
+				</c:when>
+				<c:when
+					test="#{not empty flowScope.userAccountBean.role and flowScope.userAccountBean.role eq 'ADMIN'}">
+					<li><h:commandLink id="manage" value="Manage" action="#"
+							title="Manage" immediate="true" /></li>
+					<li><h:commandLink id="logout" value="Logout" action="logout"
+							title="Logout" immediate="true" /></li>
+				</c:when>
+				<c:otherwise>
+
+				</c:otherwise>
+			</c:choose>
+		</ul>
+	</h:form>
+</f:subview>

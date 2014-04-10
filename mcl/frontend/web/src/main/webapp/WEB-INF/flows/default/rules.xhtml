@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/page-templates/authenticated.xhtml">
+
+	<!-- Populates title tag of the page template -->
+	<ui:define name="title">
+		Rules
+	</ui:define>
+
+	<!-- Populates head tag of the page template -->
+	<ui:define name="head-element">
+		<meta name="keywords" content="MCL, HCL League" />
+	</ui:define>
+	
+	<!-- Page Title Contents -->
+	<ui:define name="page-title">
+		Page Title
+	</ui:define>
+
+	<!-- Page Header Contents -->
+	<ui:define name="page-header">
+		<ui:include src="/WEB-INF/page-fragments/header.xhtml" />
+	</ui:define>
+
+	<!-- Page Body Contents -->
+	<ui:define name="page-body">
+		<p:spacer height="0" />
+			<!-- <h1>#{mcl.testMsg}</h1> -->
+			<!-- <h:graphicImage value="data:image/png;base64,#{mcl.img}" /> -->
+			<p:tabView orientation="right" effect="fade" width="100%">
+				<p:tab title="About the League">
+					<p>MCL is a game that gives you the fun of being a team owner, at no cost. We give you Rs. 10,000 in (unfortunately) MCL currency, using which, you create a virtual XI, by picking batsmen, bowlers, all-rounders and a wicket-keeper from all the teams. </p>
+					<br />
+					<p>Your MCL team has to meet certain criteria like squad balance, franchise spread etc. Your players then start earning you points, based on their actual performance in the matches.</p>
+					<br />
+					<p>There are points for batting, bowling, fielding as well as bonuses for being Player of the Match, etc. The MCL team with the most points wins. Simple, isn't it? Yes. It's quite easy to play. And if you win, it can also be very rewarding, with match tickets and official MCL merchandize coming your way.</p>
+					<br />
+					<p>MCL Championship: This game runs through the MCL. You can make substitutions to your squad before every match (up to a certain limit). The winner is the team with the maximum points across all matches.</p>										
+								
+				</p:tab>
+				<p:tab title="Creating a Team ">
+					<p>First you need to pick a user name. It may be a good idea to pick your real name because if you do really well, there's a good chance your name will be flashed on TV. You can then create your team by giving it an awesome name, inspiring motto and an emblem. You can choose from the various emblem options we have given you, or upload an original creation of yours.</p>
+					<br />
+					<p><strong>NOTE:</strong> The username, team name, motto and emblem will be moderated. Anything that is found racist, vulgar or offensive will be deleted, and the user may be blocked from playing the game. In case you are uploading a picture as your emblem, make sure you are not violating any copyright.</p>
+				</p:tab>
+				<p:tab title="Selecting Players ">
+					<p>For Championship, you have Rs. 10,000 to build a squad of 11 players. Each player has been assigned roles (batsman, all rounder, wicket keeper, bowler), and a price (ranging from Rs. 600 to  Rs. 1,100).</p>
+					<br />
+					<ul type="disc">
+					<li><strong>Squad Balance:</strong></li> 
+					<li>
+						<ul type="circle">
+							<li>At least 4 batsmen.</li> 
+							<li>At least 1 all rounders.</li> 
+							<li>Exactly 1 wicket keeper (you can pick variable role wicket keepers as batsmen)</li> 
+							<li>At least 2 bowlers.</li> 
+							<li>Your squad must have at least 5 players who can bowl, i.e., bowlers and all rounders.</li> 
+						</ul>
+					</li>
+					<li>
+						<strong>Overseas Limit:</strong> A maximum of 4 overseas players.
+					</li>
+					<li>
+						<strong>Uncapped Quota:</strong> At least 1 uncapped player.
+					</li>
+					<li>
+						<strong>Franchise Spread:</strong> Not more than 6 players from any one MCL franchise.
+					</li>
+					</ul>
+					<br />
+					<p>Once you have selected a squad, pick any one player from your XI to be the Power Player. Your Power Player earns you double points, so he can make a big difference to your score.</p>
+					<br />
+					<p>Your XI will start earning points from the next match.</p> 					
+				</p:tab>
+			</p:tabView>
+
+		
+	</ui:define>
+
+	<!-- Page Footer Contents -->
+	<ui:define name="page-footer">
+		<ui:include src="/WEB-INF/page-fragments/footer.xhtml" />
+	</ui:define>
+	
+	<!-- Login Modal Panel --> 
+	<ui:define name="modalPanel">
+		<p:dialog widgetVar="confirmDialog" header="Login to MCL" modal="true">
+			<h:form method="post" action="#" id="login">
+				<p:panelGrid border="0" styleClass="table">
+					<p:row>
+						<p:column>
+									Username
+								</p:column>
+						<p:column>
+							<p:inputText id="username" value="${flowScope.userName}"
+								required="true" requiredMessage="Username is Mandatory"
+								maxlength="10" autocomplete="off" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+									Password
+								</p:column>
+						<p:column>
+							<p:password id="password" value="${flowScope.password}"
+								required="true" requiredMessage="Password is mandatory"
+								maxlength="10" autocomplete="off" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column colspan="2">
+							<p:spacer height="0" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column colspan="2">
+							<center>
+								<p:commandButton value="Submit" action="validateLogin" />
+								<p:commandButton type="reset" value="Reset" />
+							</center>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

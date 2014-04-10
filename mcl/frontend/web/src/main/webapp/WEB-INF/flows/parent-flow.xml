@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<input name="tab" value="flowScope.tab" required="false" />
+
+	<!-- COMMON STATES -->
+
+	<action-state id="initialCheck">
+		<on-entry>
+			<evaluate expression="null" result="flowScope.userAccountBean" />		
+		</on-entry>
+		<evaluate
+				expression="T(org.springframework.security.core.context.SecurityContextHolder).getContext().getAuthentication().getPrincipal()"
+				result="flowScope.userAccountBean" />		
+		<transition on="anonymousUser" to="newEntry" />	 
+		<transition on="success" to="alreadyLoggedIn" />
+	</action-state>
+
+	<end-state id="myDefault" view="flowRedirect:default?isFlowRedirect=Yes" />
+	<end-state id="myHome" view="flowRedirect:home?isFlowRedirect=Yes" />
+	<end-state id="myDashboard" view="flowRedirect:dashboard?isFlowRedirect=Yes" />
+	<end-state id="myRules" view="flowRedirect:rules?isFlowRedirect=Yes" />
+	<end-state id="logout" view="flowRedirect:logout?isFlowRedirect=Yes" />
+	<end-state id="unexpectedError"
+		view="externalRedirect:logout?spring-security-redirect=/spring/unexpectedError" />
+	<end-state id="unsupportedOperation"
+		view="externalRedirect:logout?spring-security-redirect=/spring/unsupportedOperation" />
+	<end-state id="end"
+		view="externalRedirect:servletRelative:/home?tab=#{tab}" />
+
+	<!-- COMMON TRANSITIONS -->
+
+	<global-transitions>
+		<transition on="default" to="myDefault" />
+		<transition on="home" to="myHome" />
+		<transition on="dashboard" to="myDashboard" />
+		<transition on="rules" to="myRules" />
+		<transition on="logout" to="logout" />
+		<transition on="exit" to="end" />
+		<transition
+			on-exception="com.mcl.frontend.service.common.exception.MCLServiceException"
+			to="unexpectedError" />
+	</global-transitions>
+
+</flow>

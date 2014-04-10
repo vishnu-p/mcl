@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+	parent="parent-flow">
+
+	<!-- Also see ../parent-flow.xml. -->
+
+	<!-- <var name="userBean" class="org.springframework.samples.webflow.ajax.UserBean" 
+		/> -->
+
+	<on-start>
+		<evaluate expression="new java.lang.String('myLogin')" result="flowScope.menuSelector"/>
+		<evaluate expression="authenticationService.registerPreAuthenticatedUnauthenticationToken()" />
+		<evaluate expression="null" result="flowScope.userAccountBean" />	
+	</on-start>
+	<!-- <var name="userBean" class="com.mcl.domain.User" /> -->
+	<view-state id="view">
+		<on-entry>
+			<set name="flowScope.userName" value="null" />
+		</on-entry>
+		<transition on="loginUser" to="checkUsernameExists" />
+		<on-exit>
+			<evaluate expression="false" result="flowScope.isValidLogin" />
+			<evaluate expression="false" result="flowScope.isLoginSuccess" />
+		</on-exit>
+	</view-state>
+		
+	<decision-state id="checkUsernameExists">
+		<on-entry>
+			<evaluate
+				expression="userAccountService.getUserAccountByUsername(flowScope.userName)"
+				result="flowScope.userAccountBean" />
+		</on-entry>
+		<if test="flowScope.userAccountBean == null" then="usernameFailed"
+			else="checkUserAccountLocked" />
+	</decision-state>
+
+	<action-state id="usernameFailed">
+		<set name="flowScope.isUsernameExists" value="false" type="boolean" />
+		<transition to="login">
+			<set name="flowScope.userName" value="null" />
+		</transition>
+	</action-state>
+
+	<decision-state id="checkUserAccountLocked">
+		<on-entry>
+			<set name="flowScope.isUsernameExists" value="true" type="boolean" />
+		</on-entry>
+		<if
+			test="flowScope.userAccountBean != null and flowScope.userAccountBean.lockedAccount == true"
+			then="login" else="validateLogin" />
+	</decision-state>
+
+	<decision-state id="validateLogin">
+		<on-entry>
+			<evaluate
+				expression="userAccountService.validateLogin(flowScope.userName, flowScope.password)"
+				result="flowScope.isValidLogin" />
+		</on-entry>
+		<if test="flowScope.isValidLogin == true" then="validLogin" else="invalidLogin" />
+	</decision-state>
+
+	<action-state id="validLogin">
+		<evaluate expression="authenticationService.registerPreAuthenticatedAuthenticationToken(flowScope.userAccountBean)" />
+		<set name="flowScope.isLoginSuccess" value="true" />
+		<transition to="loginSuccess" />
+	</action-state>
+
+	<action-state id="invalidLogin">
+		<set name="flowScope.isLoginSuccess" value="false" />
+		<transition to="loginFailed" />
+	</action-state>	
+
+	<end-state id="loginSuccess" view="flowRedirect:dashboard?isFlowRedirect=Yes" />	
+	<end-state id="loginFailed" view="flowRedirect:home?isFlowRedirect=Yes;errorMessage=wrongcredentials" />
+			
+</flow>

@@ -1,5 +1,7 @@
 package com.mcl.ws.cricket.team;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,14 +15,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Results {
 	
 	@JsonProperty("TeamProfile")
-	private Team team;
+	private List<Team> team;
 	@JsonProperty("TeamProfile")
-	public Team getTeam() {
+	public List<Team> getTeam() {
 		return team;
 	}
 	@JsonProperty("TeamProfile")
-	public void setTeam(Team team) {
+	public void setTeam(List<Team> team) {
 		this.team = team;
-	}	
+	}
 
 }

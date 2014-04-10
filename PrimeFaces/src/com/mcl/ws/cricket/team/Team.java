@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"TeamId",
 	"TeamName",
 	"ShortName",
-	"TeamLargeRoundFlagPath",
+	"TeamFlagPath",
 	"Players"
 })
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -22,7 +22,7 @@ public class Team {
 	private String teamName;
 	@JsonProperty("ShortName")
 	private String shortName;
-	@JsonProperty("TeamLargeRoundFlagPath")
+	@JsonProperty("TeamFlagPath")
 	private String flagPath;
 	@JsonProperty("Players")	
 	private Players players;
@@ -51,11 +51,11 @@ public class Team {
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
-	@JsonProperty("TeamLargeRoundFlagPath")
+	@JsonProperty("TeamFlagPath")
 	public String getFlagPath() {
 		return flagPath;
 	}
-	@JsonProperty("TeamLargeRoundFlagPath")
+	@JsonProperty("TeamFlagPath")
 	public void setFlagPath(String flagPath) {
 		this.flagPath = flagPath;
 	}
